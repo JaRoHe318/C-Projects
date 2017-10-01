@@ -1,10 +1,15 @@
 #include <iostream>
+#include "poly.h"
 using namespace std;
 
 
 
 int main(){
     cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n======================================================================================================\n\n\n\n";
+
+    Poly pnom;
+
+
 
 
 

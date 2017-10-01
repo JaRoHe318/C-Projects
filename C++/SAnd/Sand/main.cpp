@@ -1,37 +1,11 @@
 using namespace std;
 #include <iostream>
+
 #include <cassert>
 #include <cstring>
 
 char* _copy(char* copy_me);
 char* _delete_all(char* delete_me);
-
-class normal{
-public:
-    normal(int a, int b);
-    void set(int a, int b);
-    friend ostream& operator << (ostream& outs, const normal& n);
-private:
-    int _a;
-    int _b;
-};
-
-normal::normal(int a, int b){
-    _a = a;
-    _b = b;
-}
-
-void normal::set(int a, int b){
-    _a = a;
-    _b = b;
-}
-
-ostream& operator << (ostream& outs, const normal& n){
-    outs<<"{"<<n._a<<", "<<n._b<<"}";
-    return outs;
-}
-
-//===============================
 
 class abnormal{
 public:

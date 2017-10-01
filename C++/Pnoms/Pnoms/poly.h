@@ -1,17 +1,33 @@
 #ifndef POLY_H
 #define POLY_H
 
+using namespace std;
+#include <iostream>
+#include <cassert>
+#include <cstring>
 
-//class Poly
-//{
-//public:
-//    Poly();
-//};
 
-//#endif // POLY_H
 
-class Poly
-{
+struct Term{
+    double _coef;
+    int _exp;
+
+    Term(double coef, int exp);
+    friend bool operator ==(const Term& lhs, const Term& rhs);
+    friend bool operator !=(const Term& lhs, const Term& rhs);
+    friend bool operator >(const Term& lhs, const Term& rhs);
+    friend bool operator <(const Term& lhs, const Term& rhs);
+
+    //used in Poly division operator
+    friend Term operator / (const Term& lhs, const Term& rhs);
+
+    friend ostream& operator <<(ostream& outs, const Term& t);
+};
+
+
+
+class Poly{
+
 public:
     Poly();
     Poly(double* coefs, int order);
@@ -22,33 +38,40 @@ public:
     ~Poly();
 
 
+    //High lvl
+    friend Poly operator %(const Poly& lhs, const Poly& rhs);
+    friend Poly operator /(const Poly& lhs, const Poly& rhs);
+    friend Poly operator *(const Poly& lhs, const Poly& rhs);
+    friend Poly operator - (const Poly& lhs, const Poly& rhs);
+    friend istream& operator >>(istream& ins, Poly& p);
+
+    friend Poly operator +(const Poly& lhs, const Poly& rhs);
+    friend ostream& operator <<(ostream& outs, const Poly& p);
+
+    friend Poly operator -(const Poly& p);
+    Term& operator[](int order) const;
+    friend Poly operator *(const Poly& lhs, const Term& t);
+    friend Poly operator +(const Poly& lhs, const Term& t);
+
+
+
+
+
     friend bool operator ==(const Poly& lhs, const Poly& rhs);
     friend bool operator !=(const Poly& lhs, const Poly& rhs);
     friend bool operator >(const Poly& lhs, const Poly& rhs);
     friend bool operator <(const Poly& lhs, const Poly& rhs);
 
-    Term operator[](int order) const;
-
-    friend Poly operator +(const Poly& lhs, const Term& t);
-    friend Poly operator +(const Poly& lhs, const Poly& rhs);
-
-    friend Poly operator -(const Poly& p);
-    friend Poly operator - (const Poly& lhs, const Poly& rhs);
-
-    friend Poly operator *(const Poly& lhs, const Term& t);
-    friend Poly operator *(const Poly& lhs, const Poly& rhs);
-
-    friend Poly operator /(const Poly& lhs, const Poly& rhs);
-    friend Poly operator %(const Poly& lhs, const Poly& rhs);
-
-    friend ostream& operator <<(ostream& outs, const Poly& p);
-    friend istream& operator >>(istream& ins, Poly& p);
-
-    int order() const {return _order;}
+    int order() const { //may give trouble?
+        return _order;
+    }
 
 private:
     void fix_order();           //get rid of highest terms with zero coefs
     int _order;
     double* _coefs;
+
 };
+
+
 #endif // POLY_H
