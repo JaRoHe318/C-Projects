@@ -1,88 +1,74 @@
 using namespace std;
 #include <iostream>
-
+#include "big3.h"
 #include <cassert>
 #include <cstring>
 
-char* _copy(char* copy_me);
-char* _delete_all(char* delete_me);
 
-class abnormal{
-public:
-    abnormal();
-    ~abnormal(); //destructor
-    abnormal(const abnormal& other); //copy ctor X x(y) or X x = y
-    abnormal& operator =(const abnormal& RHS); //x = y;
+typedef char T;
 
-    friend ostream& operator << (ostream& outs, const abnormal& n);
-    void set(char* s);
-    char* _a;
-};
-
-abnormal::abnormal(){
-    _a = new char[100000000];
-    strcpy(_a, "default string");
-}
-abnormal::~abnormal(){ //destructor
-    cout<<"abnormal destructor was called."<<endl;
-    _a = _delete_all(_a);
-}
-
-abnormal::abnormal(const abnormal& other){
-    cout<<"abnormal copy ctor is being called: "<<other<<endl;
-    _a= _copy(other._a);
-}
-abnormal& abnormal::operator =(const abnormal& RHS){
-    cout<<"abnormal assignment is being called: "<<RHS<<endl;
-    if (this != &RHS){
-        //delete my structures..
-        _a = _delete_all(_a);
-        _a = _copy(RHS._a);
-    }
-    return *this;
-}
-
-void abnormal::set(char* s){
-    strcpy(_a, s);
-}
-
-ostream& operator << (ostream& outs, const abnormal& printme){
-    outs<<"{"<<printme._a<<"}";
-    return outs;
-}
-abnormal return_abnormal(){
-    abnormal a;
-    a.set("returning abnormal object");
-    cout<<"inside the function 'return_abnormal': _a: "<<a<<endl;
-    return a;
-}
-
-void test(){
-    abnormal a;
-    a.set("something");
-    cout<<"inside the function: _a:"<<a<<endl;
-}
+T *allocate(int size);
+T* copy_array(T* src, int size);
+T* resize(T* src, T* old, T* newA);
+void delete_array(T* &a);
 
 
-int main(int argc, char *argv[]){
-    cout <<endl<<endl<<endl<< "===================" << endl;
+int main(){
+    cout << "\n\n\n\n======================================================================================================\n\n\n\n";
+//    T meh[10]={0,2,3,4,4,5};
+//    T meh[20]= "bannaa";
+      T* meh = new T[20];
+      meh = "choco";
+//    allocate(10);
+    cout<<"meh: "<<meh<<endl<<endl;
 
-    abnormal func_ret = return_abnormal();
-    cout<<"Here is what we got back from func: "<<
-    func_ret<<endl;
+//    cout<<copy_array(meh,10)<<endl;
 
-    cout <<endl<<endl<<endl<< "===================" << endl;
+    delete_array(meh);
+
+    cout<<"d meh: "<<meh<<endl<<endl;
+
+
+
+
+    cout <<"\n\n\n======================================================================================================\n\n";
     return 0;
 }
 
-char* _copy(char* copy_me){
-    char* temp = new char[strlen(copy_me)+1];
-    strcpy(temp, copy_me);
-    return temp;
+T* allocate(int size){
+    T* al;
+    al = new T[size];
+    return al;
 }
 
-char* _delete_all(char* delete_me){
-    assert (delete_me != NULL);
-    delete delete_me;
-    return NULL;
+T* copy_array(T* src, int size){
+    T* newA;
+    cout<<" newA: "<<newA<<endl;
+    newA = allocate(size);
+    newA = src;
+    cout<<" newA2: "<<newA<<endl;
+    return newA;
 }
+
+T* resize(T* src, T* old, T* newA){
+
+}
+
+void delete_array(T* &a){
+    delete [] &a;
+}
+
+
+
+
+//int main(int argc, char *argv[]){//Big3
+//    cout <<endl<<endl<<endl<< "===================" << endl;
+
+//    abnormal func_ret = return_abnormal();
+//    cout<<"Here is what we got back from func: "<<
+//    func_ret<<endl;
+
+//    cout <<endl<<endl<<endl<< "===================" << endl;
+//    return 0;
+//}
+

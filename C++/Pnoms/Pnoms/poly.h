@@ -8,7 +8,7 @@ using namespace std;
 
 
 
-struct Term{
+struct Term{//================================================
     double _coef;
     int _exp;
 
@@ -24,21 +24,18 @@ struct Term{
     friend ostream& operator <<(ostream& outs, const Term& t);
 };
 
-
-
-class Poly{
+class Poly{//==================================================
 
 public:
     Poly();
     Poly(double* coefs, int order);
 
-    //the BIG 3
+    //the BIG 3================================================
     Poly(const Poly& other);
     Poly& operator =(const Poly& rhs);
     ~Poly();
 
-
-    //High lvl
+    //High lvl=================================================
     friend Poly operator %(const Poly& lhs, const Poly& rhs);
     friend Poly operator /(const Poly& lhs, const Poly& rhs);
     friend Poly operator *(const Poly& lhs, const Poly& rhs);
@@ -48,14 +45,11 @@ public:
     friend Poly operator +(const Poly& lhs, const Poly& rhs);
     friend ostream& operator <<(ostream& outs, const Poly& p);
 
+    //Low Level================================================
     friend Poly operator -(const Poly& p);
-    Term& operator[](int order) const;
+    Term operator[](int order) const;
     friend Poly operator *(const Poly& lhs, const Term& t);
     friend Poly operator +(const Poly& lhs, const Term& t);
-
-
-
-
 
     friend bool operator ==(const Poly& lhs, const Poly& rhs);
     friend bool operator !=(const Poly& lhs, const Poly& rhs);

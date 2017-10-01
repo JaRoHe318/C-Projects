@@ -5,4 +5,5 @@ CONFIG -= qt
 
 SOURCES += main.cpp
 
-HEADERS +=
+HEADERS += \
+    big3.h
