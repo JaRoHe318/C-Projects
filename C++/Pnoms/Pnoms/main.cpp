@@ -9,6 +9,8 @@ int main(){
 
     Poly pnom;
 
+//    cin>>pnom;
+
 
 
 

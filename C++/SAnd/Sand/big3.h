@@ -29,7 +29,6 @@ abnormal::~abnormal(){ //destructor
     cout<<"abnormal destructor was called."<<endl;
     _a = _delete_all(_a);
 }
-
 abnormal::abnormal(const abnormal& other){
     cout<<"abnormal copy ctor is being called: "<<other<<endl;
     _a= _copy(other._a);

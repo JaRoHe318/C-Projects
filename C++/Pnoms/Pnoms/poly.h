@@ -6,13 +6,15 @@ using namespace std;
 #include <cassert>
 #include <cstring>
 
-
+typedef double T;
 
 struct Term{//================================================
-    double _coef;
-    int _exp;
+    double _coef=0;
+    int _exp=0;
 
+    Term();
     Term(double coef, int exp);
+
     friend bool operator ==(const Term& lhs, const Term& rhs);
     friend bool operator !=(const Term& lhs, const Term& rhs);
     friend bool operator >(const Term& lhs, const Term& rhs);
@@ -21,14 +23,22 @@ struct Term{//================================================
     //used in Poly division operator
     friend Term operator / (const Term& lhs, const Term& rhs);
 
+    friend Term operator +(const Term& lhs, const Term& t);
+    friend Term operator *(const Term& lhs, const Term& rhs);
+    friend Term operator -(const Term& t);
+    friend Term operator -(const Term& lhs, const Term& rhs);
+    friend istream& operator >>(istream& ins, Term& t);
+
     friend ostream& operator <<(ostream& outs, const Term& t);
+
+
 };
 
 class Poly{//==================================================
 
 public:
     Poly();
-    Poly(double* coefs, int order);
+    Poly(T* coefs, int order);
 
     //the BIG 3================================================
     Poly(const Poly& other);
@@ -61,7 +71,7 @@ public:
     }
 
 private:
-    void fix_order();           //get rid of highest terms with zero coefs
+    void fix_order();//get rid of highest terms with zero coefs
     int _order;
     double* _coefs;
 
