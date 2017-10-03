@@ -7,9 +7,21 @@ using namespace std;
 int main(){
     cout << "\n\n\n\n======================================================================================================\n\n\n\n";
 
-    Poly pnom;
+    T test[10] = {1,0,2,0,1};
+    T test2[10] = {1,0,2,1};
 
-//    cin>>pnom;
+    Poly pnom(test,4);
+    Poly pnom2(test2,5);
+    cout<<pnom;
+    cout<<endl<<pnom2;
+
+    if(pnom>pnom2){
+        cout<<"\n\n yup";
+    }
+    if(pnom<pnom2){
+        cout<<"\n\n nope";
+    }
+
 
 
 

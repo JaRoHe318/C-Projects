@@ -1,136 +1,41 @@
 #include "poly.h"
 
-T *allocate(int size);
-T* copy_array(T* src, int size);
-T* resize(T* src, int oldSize, int newSize);
-void delete_array(T* &a);
-
-
-
-//Term Class====================================================
-Term::Term(){
-
-}
-
-Term::Term(double coef, int exp){
-    _coef=coef;
-    _exp=exp;
-}
-
-bool operator ==(const Term& lhs, const Term& rhs){
-    if(lhs._coef!=rhs._coef||lhs._exp!=rhs._exp){
-        cout<<"\n\n NOT EQUAL, ERR \n\n";
-        return false;
-
-    }else{
-        cout<<"\n\n Equal! \n\n";
-        return true;
-    }
-}
-
-bool operator !=(const Term& lhs, const Term& rhs){
-    if(lhs._coef==rhs._coef&&lhs._exp==rhs._exp){
-        cout<<"\n\n EQUAL, ERR \n\n";
-        return false;
-    }else{
-        cout<<"\n\n Not equal! \n\n";
-        return true;
-    }
-}
-
-bool operator >(const Term& lhs, const Term& rhs){
-    //    if((lhs._coef>rhs._coef&&lhs._exp==rhs._exp)||(lhs._exp>rhs._exp)){
-    if(lhs._exp>rhs._exp){
-        cout<<"\n\n Left Greater than!\n\n";
-        return true;
-    } else{
-        cout<<"\n\n NOT GREATER \n\n";
-        return false;
-    }
-}
-
-bool operator <(const Term& lhs, const Term& rhs){
-    if(lhs._exp<rhs._exp){
-        cout<<"\n\n Right Greater than!\n\n";
-        return true;
-    } else{
-        cout<<"\n\n NOT GREATER \n\n";
-        return false;
-    }
-}
-
-//used in Poly division operator
-Term operator / (const Term& lhs, const Term& rhs){
-    T coef = lhs._coef/rhs._coef;
-    int exp = lhs._exp-rhs._exp;
-    return (Term(coef,exp));
-}
-
-Term operator +(const Term& lhs, const Term& rhs){
-    assert(lhs._exp==rhs._exp);
-    T coef=lhs._coef+rhs._coef;
-    return (Term(coef,lhs._exp));
-}
-
-Term operator *(const Term& lhs, const Term& rhs){
-    int exp =  lhs._exp+rhs._exp;
-    T coef = lhs._coef*rhs._coef;
-    return(Term(coef,exp));
-}
-
-Term operator -(const Term& t){
-    return(Term(-t._coef,t._exp));
-}
-
-Term operator -(const Term& lhs, const Term& rhs){
-    assert(lhs._exp==rhs._exp);
-    T coef=lhs._coef-rhs._coef;
-    return (Term(coef,lhs._exp));
-}
-
-istream& operator >>(istream& ins, Term& t){
-    char var;
-    ins>>t._coef>>var>>t._exp; //needs a space between _coef and var
-    return ins;
-}
-
-ostream& operator <<(ostream& outs, const Term& t){
-    outs<<t._coef<<"x^"<<t._exp;
-    return outs;
-}
-
-
 //Poly Class=====================================================
 Poly::Poly(){
-    cout<<"\n In poly!\n\n";
-    Term a(2,2);
-    Term b(2,2);
-    Term c;
+    cout<<"in this poly";
+    _order = 1;
+    functions a;
+    _coefs=a.allocate(_order);
 
-    cout<<"Input Poly: ";
-    cin>>c;
 }
 
 Poly::Poly(T* coefs, int order){
-    cout<<"in [] \n\n";
-    coefs = new T[order];
+    _order=order;
+    cout<<"\n Poly(binary)\n";
+    functions a;
+    _coefs=coefs;
+
 }
 
 //the BIG 3
 Poly::Poly(const Poly& other){
+    functions calc;
     cout<<"\n\n Copy Const! \n\n";
-    _coefs = copy_array(other._coefs,_order);
+    _coefs=calc.copy_array(other._coefs,_order);
 }
 Poly& Poly::operator =(const Poly& rhs){
+    functions calc;
     cout<<"\n\n Assignment OP"<<rhs<<endl;
     if(this != &rhs){
-        delete_array(_coefs);
-        _coefs = copy_array(rhs._coefs, _order);
+        _coefs=calc.delete_array(_coefs);
+        _coefs = calc.copy_array(rhs._coefs, _order);
     }
+    return *this;
 }
- Poly::~Poly(){
+Poly::~Poly(){
+    functions calc;
     "\n\n I am destroyer of wrlds\n\n";
-    delete_array(_coefs);
+    _coefs=calc.delete_array(_coefs);
 }
 
 
@@ -143,113 +48,108 @@ Poly operator %(const Poly& lhs, const Poly& rhs){
 }
 Poly operator /(const Poly& lhs, const Poly& rhs){
 
+    //    return (Poly());
 }
 Poly operator *(const Poly& lhs, const Poly& rhs){
 
+    //    return (Poly());
 }
 Poly operator -(const Poly& lhs, const Poly& rhs){
 
+    //    return (Poly());
 }
 
 istream& operator >>(istream& ins, Poly& p){
-    char ans='y';
-    int i=0;
-    while (ans!='X'){
-        cout<<"\n: ";
-        ins>>p;
-        i++;
-        cout<<"\n\ni: "<<i;
-        cout<<"another int? "; cin>>ans;
-    }
+    Term t;
+
+    do{
+        cout<<" In input p :";
+        cin>>t;
+        p._coefs[t._exp]=t._coef;
+
+    }while(t._exp!=0);
+
+    return ins;
 }
 
 Poly operator +(const Poly& lhs, const Poly& rhs){
-
+    //    return (Poly());
 }
 
 ostream& operator <<(ostream& outs, const Poly& p){
-
+    cout<<"\n\n order:"<<p._order<<endl;
+    for(int i=p._order;i>=0;i--){
+        if(i==0){
+            outs<<p[i];
+        }else{
+            //            outs<<p[i]<<" + ";
+            outs<<p[i];
+        }
+    }
+    return outs;
 }
-
-
-
-
 
 //Low Level (Little Access to _coefs)===========================
 Poly operator -(const Poly& p){
 
 }
 Term Poly::operator[](int order) const{
-    double coefs = _coefs[order];
+    T coefs = _coefs[order];
     return Term(coefs,order);
 }
 Poly operator *(const Poly& lhs, const Term& t){
 
 }
 Poly operator +(const Poly& lhs, const Term& t){
-
+    if(lhs._order==t._exp){
+        Term poly = lhs[t._exp];
+        T co = poly._coef+t._coef;
+        //        lhs[t._exp]=co;
+    }
 }
 
 bool operator ==(const Poly& lhs, const Poly& rhs){
+    int temp = lhs._order;
+    int temp2 = rhs._order;
 
+    if(temp!=temp2){
+        return false;
+    }else if(temp==temp2){
+        while(temp>=0){
+            if(lhs[temp]!=rhs[temp2]){
+                return false;
+            }
+            temp--;
+            temp2--;
+            continue;
+        }
+        return true;
+    }
 }
 
 bool operator !=(const Poly& lhs, const Poly& rhs){
-
+    if(lhs==rhs){
+        return false;
+    }else{
+        return true;
+    }
 }
 
 bool operator >(const Poly& lhs, const Poly& rhs){
-
+    if(lhs._order>rhs._order){
+        return true;
+    }else{
+        return false;
+    }
 }
 
 bool operator <(const Poly& lhs, const Poly& rhs){
-
-}
-
-
-//Lowest Lvl Functions
-T* allocate(int size){
-    T* al;
-    T* temp;
-    al = new T[size];
-    temp=al;
-    for(int i = 0;i<size;i++){
-        *temp=0;
-        temp++;
+    if(lhs>rhs){
+        return false;
+    }else{
+        return true;
     }
 
-
-    return al;//returns address of newly created array
 }
-T* copy_array(T* src, int size){
-    T* copy = new T[size];
-    T* p;
-    p=copy;
-    for(int i=0; i<size; i++){
-        *p = *src;
-        p++;
-        src++;
-    }
-    return copy;//returns address of new array copy
-}
-T* resize(T* src,int oldSize, int newSize){//takes an array, puts in longer array, deletes old array.
-    T* temp;
-    T* w;
-    w=src;
-    temp=allocate(newSize);//allocates new array of 0s
-    for(int i = 0;i<oldSize;i++){
-        *temp=*w;
-        temp++;
-        w++;
-    }
-    delete [] src; // may not need ?
-    return temp; //returns location of new array
-}
-void delete_array(T* &a){
-    delete [] a;
-}
-
-
-
 
 

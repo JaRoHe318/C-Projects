@@ -4,7 +4,11 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += main.cpp \
-    poly.cpp
+    poly.cpp \
+    term.cpp \
+    functions.cpp
 
 HEADERS += \
-    poly.h
+    poly.h \
+    term.h \
+    functions.h

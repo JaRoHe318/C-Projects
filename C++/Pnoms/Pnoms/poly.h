@@ -1,38 +1,7 @@
 #ifndef POLY_H
 #define POLY_H
+#include "term.h"
 
-using namespace std;
-#include <iostream>
-#include <cassert>
-#include <cstring>
-
-typedef double T;
-
-struct Term{//================================================
-    double _coef=0;
-    int _exp=0;
-
-    Term();
-    Term(double coef, int exp);
-
-    friend bool operator ==(const Term& lhs, const Term& rhs);
-    friend bool operator !=(const Term& lhs, const Term& rhs);
-    friend bool operator >(const Term& lhs, const Term& rhs);
-    friend bool operator <(const Term& lhs, const Term& rhs);
-
-    //used in Poly division operator
-    friend Term operator / (const Term& lhs, const Term& rhs);
-
-    friend Term operator +(const Term& lhs, const Term& t);
-    friend Term operator *(const Term& lhs, const Term& rhs);
-    friend Term operator -(const Term& t);
-    friend Term operator -(const Term& lhs, const Term& rhs);
-    friend istream& operator >>(istream& ins, Term& t);
-
-    friend ostream& operator <<(ostream& outs, const Term& t);
-
-
-};
 
 class Poly{//==================================================
 
