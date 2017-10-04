@@ -1,7 +1,6 @@
 #include "functions.h"
 
-functions::functions()
-{
+functions::functions(){
 
 }
 //Lowest Lvl Functions

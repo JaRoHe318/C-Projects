@@ -2,8 +2,7 @@
 
 //Poly Class=====================================================
 Poly::Poly(){
-    cout<<"in this poly";
-    _order = 1;
+    _order = 10;
     functions a;
     _coefs=a.allocate(_order);
 
@@ -11,9 +10,8 @@ Poly::Poly(){
 
 Poly::Poly(T* coefs, int order){
     _order=order;
-    cout<<"\n Poly(binary)\n";
     functions a;
-    _coefs=coefs;
+    _coefs=a.copy_array(coefs,order);
 
 }
 
@@ -23,18 +21,18 @@ Poly::Poly(const Poly& other){
     cout<<"\n\n Copy Const! \n\n";
     _coefs=calc.copy_array(other._coefs,_order);
 }
+
 Poly& Poly::operator =(const Poly& rhs){
     functions calc;
     cout<<"\n\n Assignment OP"<<rhs<<endl;
     if(this != &rhs){
         _coefs=calc.delete_array(_coefs);
-        _coefs = calc.copy_array(rhs._coefs, _order);
+        _coefs = calc.copy_array(rhs._coefs, rhs._order);
     }
     return *this;
 }
 Poly::~Poly(){
     functions calc;
-    "\n\n I am destroyer of wrlds\n\n";
     _coefs=calc.delete_array(_coefs);
 }
 
@@ -55,15 +53,16 @@ Poly operator *(const Poly& lhs, const Poly& rhs){
     //    return (Poly());
 }
 Poly operator -(const Poly& lhs, const Poly& rhs){
-
+    cout<<"oh";
     //    return (Poly());
 }
 
 istream& operator >>(istream& ins, Poly& p){
     Term t;
-
+    cin>>t;
+    p._order=t._exp;
+    p._coefs[t._exp]=t._coef;
     do{
-        cout<<" In input p :";
         cin>>t;
         p._coefs[t._exp]=t._coef;
 
@@ -77,21 +76,19 @@ Poly operator +(const Poly& lhs, const Poly& rhs){
 }
 
 ostream& operator <<(ostream& outs, const Poly& p){
-    cout<<"\n\n order:"<<p._order<<endl;
     for(int i=p._order;i>=0;i--){
-        if(i==0){
-            outs<<p[i];
-        }else{
-            //            outs<<p[i]<<" + ";
-            outs<<p[i];
-        }
+        outs<<p[i];
     }
     return outs;
 }
 
 //Low Level (Little Access to _coefs)===========================
 Poly operator -(const Poly& p){
-
+    for(int i=0; i<p._order+1; i++){
+        T temp = p._coefs[i];
+        p._coefs[i]=-temp;
+    }
+    return Poly(p._coefs,p._order);
 }
 Term Poly::operator[](int order) const{
     T coefs = _coefs[order];
@@ -109,8 +106,11 @@ Poly operator +(const Poly& lhs, const Term& t){
 }
 
 bool operator ==(const Poly& lhs, const Poly& rhs){
+    cout<<"in ==";
     int temp = lhs._order;
     int temp2 = rhs._order;
+    cout<<"order1: "<<temp;
+    cout<<"order2: "<<temp2;
 
     if(temp!=temp2){
         return false;
