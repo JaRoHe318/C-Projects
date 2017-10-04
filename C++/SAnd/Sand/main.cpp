@@ -1,6 +1,5 @@
 using namespace std;
 #include <iostream>
-#include "big3.h"
 
 template<class T>
 struct node{
@@ -21,6 +20,7 @@ ostream& operator<<(ostream& outs, const node<U>& print_me){
     outs<<"["<<print_me._item<<"] ->";
     return outs;
 }
+
 template<class T>
 node<T>* insert_head(node<T>* &head_ptr, const T& item){
     //1. create a new node(item)
@@ -31,6 +31,7 @@ node<T>* insert_head(node<T>* &head_ptr, const T& item){
     head_ptr = temp;
     return head_ptr;
 }
+
 template<class T>
 void print_lists(node<T>* head_ptr){
     //1. Walker to head_ptr
@@ -52,7 +53,8 @@ int main(){
     for(int i=0;i<6;i++){
         insert_head(head, i);
     }
-    cout<<"============== \n";
+
+
     print_lists(head);
 
 
