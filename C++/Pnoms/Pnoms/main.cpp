@@ -10,20 +10,21 @@ int main(){
     T test[10] = {1,0,2,0,1};
     T test2[10] = {1,0,2,1};
 
-    Poly pnom(test,4);
-    Poly pnom2(test2,5);
-    cout<<pnom;
-    cout<<endl<<pnom2;
+    Poly pnom;
+    Poly pnom2;
+    cout<<"Enter Pnom1:";
+    cin>>pnom;
+    cout<<endl<<endl<<endl<<"Pnom1:"<<pnom;
+    cout<<endl<<endl;
 
-    if(pnom>pnom2){
-        cout<<"\n\n yup";
+    cout<<"Enter Pnom2:";
+    cin>>pnom2;
+    cout<<endl<<endl<<endl<<"Pnom2:"<<pnom2;
+
+
+    if(pnom==pnom2){
+        cout<<endl<<endl<<pnom<<" is equal "<<pnom2;
     }
-    if(pnom<pnom2){
-        cout<<"\n\n nope";
-    }
-
-
-
 
 
 
