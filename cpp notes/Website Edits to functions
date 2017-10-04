@@ -26,8 +26,7 @@ int main(){
       *temp = 'o';
       }
       *temp=NULL;
-      
-    
+
     
     cout<<"meh: "<<meh<<endl<<endl;
 
