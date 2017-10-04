@@ -1,83 +1,63 @@
 using namespace std;
 #include <iostream>
 #include "big3.h"
-#include <cassert>
-#include <cstring>
 
+template<class T>
+struct node{
+    T _item;
+    node<T>* _next;
+    node(T item= T());
+    template <class U>//if you have an op in a Template that is being defined outside of this?
+    friend ostream& operator<<(ostream& outs, const node<U>& print_me);
+};
 
-typedef char T;
+template<class T>
+node<T>::node(T item):_item(item), _next(NULL){
 
-T *allocate(int size);
-T* copy_array(T* src, int size);
-T* resize(T* src, int oldSize, int newSize);
-void delete_array(T* &a);
+}
+
+template <class U>
+ostream& operator<<(ostream& outs, const node<U>& print_me){
+    outs<<"["<<print_me._item<<"] ->";
+    return outs;
+}
+template<class T>
+node<T>* insert_head(node<T>* &head_ptr, const T& item){
+    //1. create a new node(item)
+    node<T>* temp = new node<T>(item);
+    //2. temp's next points to wehere head is poijnting to:
+    temp->_next = head_ptr;
+    //3. point head_ptr to this new node:
+    head_ptr = temp;
+    return head_ptr;
+}
+template<class T>
+void print_lists(node<T>* head_ptr){
+    //1. Walker to head_ptr
+    node<T>* walker = head_ptr;
+    //2. loop and print until walker hits NULL
+    cout<<"H ->";
+    while(walker!=NULL){
+        cout<<*walker;  //print this node
+        walker = walker->_next; //go to the next item
+    }
+    cout<<" NULL";
+}
 
 
 int main(){
     cout << "\n\n\n\n======================================================================================================\n\n\n\n";
 
-    abnormal a;
+    node<int>* head=NULL;
+    for(int i=0;i<6;i++){
+        insert_head(head, i);
+    }
+    cout<<"============== \n";
+    print_lists(head);
+
+
 
 
     cout <<"\n\n\n======================================================================================================\n\n";
     return 0;
 }
-
-T* allocate(int size){
-    T* al;
-    T* temp;
-    al = new T[size];
-    temp=al;
-    for(int i = 0;i<size;i++){
-        *temp=0;
-        temp++;
-    }
-
-    return al;
-}
-
-T* copy_array(T* src, int size){
-    T* copy = new T[size];
-    T* p;
-    p=copy;
-    for(int i=0; i<size; i++){
-        *p = *src;
-        p++;
-        src++;
-    }
-    return copy;
-}
-
-T* resize(T* src,int oldSize, int newSize){
-    T* temp;
-    T* w;
-    w=src;
-    temp=allocate(newSize);
-    for(int i = 0;i<oldSize;i++){
-       *temp=*w;
-        temp++;
-        w++;
-    }
-
-    delete [] src; // may not need ?
-    return temp;
-}
-
-void delete_array(T* &a){
-    delete [] &a;
-}
-
-
-
-
-//int main(int argc, char *argv[]){//Big3
-//    cout <<endl<<endl<<endl<< "===================" << endl;
-
-//    abnormal func_ret = return_abnormal();
-//    cout<<"Here is what we got back from func: "<<
-//    func_ret<<endl;
-
-//    cout <<endl<<endl<<endl<< "===================" << endl;
-//    return 0;
-//}
-
