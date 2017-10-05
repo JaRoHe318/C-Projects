@@ -5,8 +5,6 @@
 
 //LinkedList Gen Functs
 
-
-
 template<class T>
 void PrintLists(Node<T>* head){
     Node<T>* walker = head;
@@ -20,12 +18,21 @@ void PrintLists(Node<T>* head){
 
 template<class T>
 void PrintListBackwards(Node<T>* head){
-
+    while(head)
 }
 
 template<class T>
 Node<T>* SearchList(Node<T>* head,const T &searchThis){
-
+    Node<T>* w = head;
+    while(w!=NULL){
+        if(w->_item == searchThis){
+            return w;
+        }
+        w = w->_next;
+    }
+    if(w==NULL){
+        return NULL;
+    }
 }
 
 
@@ -38,12 +45,13 @@ Node<T>* InsertHead(Node<T>* &head, const T& insertMe){
 }
 
 template<class T>
-Node<T>* InsertAfter(Node<T>* head,Node<T>* beforeThis ,const T &insertThis){
+Node<T>* InsertAfter(Node<T>* head,Node<T>* afterThis ,const T &insertThis){
+
 
 }
 
 template<class T>
-Node<T>* InsertBefore(Node<T>* head,Node<T>* afterThis ,const T &insertThis){
+Node<T>* InsertBefore(Node<T>* head,Node<T>* beforeThis ,const T &insertThis){
 
 }
 template<class T>
