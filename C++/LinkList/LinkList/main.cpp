@@ -1,6 +1,31 @@
 using namespace std;
 #include <iostream>
-#include "linkedlist.h"
+
+template<class T>
+struct LinkedList{
+    T _item;
+    LinkedList<T>* _next;
+
+    LinkedList(T item= T());
+
+    template <class U>
+    friend ostream& operator<<(ostream& outs, const LinkedList<U>& print_me);
+};
+
+
+
+
+
+template<class T>
+LinkedList<T>::LinkedList(T item):_item(item), _next(NULL){
+
+}
+
+template <class U>
+ostream& operator<<(ostream& outs, const LinkedList<U>& print_me){
+    outs<<"["<<print_me._item<<"] ->";
+    return outs;
+}
 
 
 
@@ -13,8 +38,7 @@ void print_lists(LinkedList<T>* head_ptr);
 int main(){
     cout << "\n\n\n\n======================================================================================================\n\n\n\n";
 
-    LinkedList<int
-            >* head=NULL;
+    LinkedList<int>* head=NULL;
     for(int i=0;i<6;i++){
         insert_head(head, i);
     }
