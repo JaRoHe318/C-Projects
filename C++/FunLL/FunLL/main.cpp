@@ -15,7 +15,7 @@ int main(){
 
     PrintLists(head);
 
-    cout<<"\n\n It's at: "<<SearchList(head, 9);
+    cout<<"\n\n It's at: "<<*SearchList(head, 9);
 
 
     cout <<"\n\n\n======================================================================================================\n\n";
