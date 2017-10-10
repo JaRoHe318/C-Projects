@@ -8,39 +8,12 @@
 
 using namespace std;
 #include <iostream>
-
 #include "node.h"
+#include <ctime>
 
-template <class T>
-node<T>* _insert_head(node<T>* & head_ptr, const T& item);
-
-template <class T>
-node<T>* _search_list(node<T>* & head_ptr, const T& item);
-
-template<class T>
-ostream& _print_list(ostream& outs, node<T>* head_ptr);
-
-template <class T>
-node<T>* _insert_head(node<T>* & head_ptr, const T& item){
-    /*
-     *
-     *
-     */
-    //1. create a new node(item)
-    node<T>* temp = new node<T>(item);
-    //2. temp's next points to where head is pointing to:
-    temp->_next = head_ptr;
-    //3.point head_ptr to this new node:
-    head_ptr = temp;
-
-    return head_ptr;
-}
-
-template<class T>
-ostream& _print_list(ostream &outs, node<T>* head_ptr){
-    //1. walker to head_ptr
-    node<T>* walker = head_ptr;
-    //loop and print until walker hits NULL;
+template<class U>
+ostream& _print_list(ostream &outs,node<U>* head_ptr){
+    node<U>* walker = head_ptr;
     outs<<"H->";
     while (walker!=NULL){
         outs<<*walker;          //print this node
@@ -49,7 +22,6 @@ ostream& _print_list(ostream &outs, node<T>* head_ptr){
     outs<<"|||"<<endl;
     return outs;
 }
-
 
 template <class T>
 node<T>* _search_list(node<T>* & head_ptr, const T& item){
@@ -60,6 +32,58 @@ node<T>* _search_list(node<T>* & head_ptr, const T& item){
     }
     return NULL;
 }
+
+template <class T>
+node<T>* _insert_head(node<T>* & head_ptr, const T& item){
+
+    node<T>* temp = new node<T>(item);
+    temp->_next = head_ptr;
+    head_ptr = temp;
+
+    return head_ptr;
+}
+
+template <class T>
+node<T>* _insertAfter(node<T>* head,node<T>* afterThis ,const T &insertThis){
+    node<T>* temp = new node<T>(insertThis);
+    temp->_next=afterThis;
+    afterThis = temp;
+
+    return head;
+}
+
+template<class T>
+node<T>* _insertRand(node<T>* head,node<T>* afterThis){
+    srand(time(0));
+    int ran=rand() % 100;
+    _insertAfter(head, afterThis, ran);
+
+}
+
+template<class T>
+node<T>* _insertBefore(node<T>* head,node<T>* beforeThis ,const T &insertThis){
+
+}
+template<class T>
+node<T>* _previousNode(node<T>* head, node<T>* prevToThis){
+
+}
+template<class T>
+T _deleteNode(node<T>* &head, node<T>* deleteThis){
+
+}
+
+template<class T>
+node<T>* _copyList(node<T>* head){
+
+}
+
+template<class T>
+node<T>* _lastNode(node<T>* head){
+
+}
+
+
 
 
 
