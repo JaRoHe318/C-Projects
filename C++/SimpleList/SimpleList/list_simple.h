@@ -12,13 +12,13 @@ class List{
 public:
     List();
 
-    //    ~List();
-    //    List(const List<T> &copyThis);
-//        List& operator =(const List& RHS);
+            ~List();
+    //        List(const List<T> &copyThis);
+    //        List& operator =(const List<T> &RHS);
 
     node<T>* InsertHead(T i);           //inset i at the head of list
 
-    node<T>* InsertAfter(T i, node<T> *&iMarker);  //insert i after iMarker
+    node<T>* InsertAfter(T i, node<T>* iMarker);  //insert i after iMarker
 
     node<T>* InsertRandom(node<T>* iMarker);
 
@@ -29,14 +29,16 @@ public:
 
 
 
-    T Delete(node<T>* iMarker);         //delete node pointed to by iMarker
+    node<T>* Delete(node<T>* iMarker);         //delete node pointed to by iMarker
 
 
 
-    void Print() const;                                 //print the list
+    void Print() const;
 
-    node<T>* Search(const T &key);      //return pointer to node containing
-    //  key. NULL if not there
+    node<T>* Search(const T &key);
+
+
+    node<T>* Next(node<T>* iMarker);
 
     node<T>* Prev(node<T>* iMarker);    //get the previous node to iMarker
 
@@ -59,17 +61,31 @@ private:
 template <class T>
 List<T>::List(){
     head = NULL;
+}/*
+template <class T>
+List<T>::List(const List<T> &copyThis){
+
 }
 
+template <class T>
+List<T>& List<T>::operator =(const List<T>& RHS){
+    if(this==&RHS){
+        return *this;
+    }
+
+
+}*/
+template <class T>
+List<T>::~List(){
+//    _deleteAll(head);
+}
 template <class T>
 node<T>* List<T>::InsertHead(T i){
     return _insert_head(head, i);
 }
 
 template <class T>
-node<T>* List<T>::InsertAfter(T i, node<T>* &iMarker){
-    cout<<"\nIn Insertafter\n";
-    cout<<"Head:"<<head;
+node<T>* List<T>::InsertAfter(T i, node<T>* iMarker){
     return _insertAfter(head, iMarker,i);
 }
 
@@ -89,8 +105,8 @@ node<T>* List<T>::InsertSorted(T i){
 }
 
 template <class T>
-T List<T>::Delete(node<T>* iMarker){
-
+node<T>* List<T>::Delete(node<T>* iMarker){
+    _deleteNode(head,iMarker);
 }
 
 template<class T>
@@ -105,7 +121,17 @@ node<T>* List<T>::Search(const T& item){
 
 template <class T>
 node<T>* List<T>::Prev(node<T>* iMarker){
+    return _previousNode(head,iMarker);
+}
 
+template <class T>
+node<T>* List<T>::Next(node<T>* iMarker){
+    if(iMarker->_next==NULL){
+        return iMarker;
+    }else{
+        iMarker=iMarker->_next;
+        return iMarker;
+    }
 }
 
 template <class T>
@@ -116,21 +142,17 @@ T& List<T>::operator[](int index){
 
 template <class T>
 node<T>* List<T>::Begin() const{
-    List l;
-    return l.head;
+    return head;
 }
 template <class T>
 node<T>* List<T>::End() const{
-
+   return _lastNode(head);
 }
 
 
 template<class U>
 ostream& operator <<(ostream& outs,const List<U>& l){
-
-
-        return _print_list(outs, l.head);
-//    return outs;
+    return _print_list(outs, l.head);
 }
 
 #endif // LIST_SIMPLE_H
