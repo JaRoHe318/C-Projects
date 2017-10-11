@@ -24,7 +24,7 @@ ostream& _print_list(ostream &outs,node<U>* head_ptr){
 }
 
 template <class T>
-node<T>* _search_list(node<T>* & head_ptr, const T& item){
+node<T>* _search_list(node<T>* &head_ptr, const T& item){
     node<T>* w;
     for (w = head_ptr; w!=NULL;w=w->_next){
         if (w->_item == item)
@@ -34,22 +34,28 @@ node<T>* _search_list(node<T>* & head_ptr, const T& item){
 }
 
 template <class T>
-node<T>* _insert_head(node<T>* & head_ptr, const T& item){
+node<T>* _insert_head(node<T>* &head_ptr, const T& item){
 
+    cout << "\ninsert header called\n";
     node<T>* temp = new node<T>(item);
     temp->_next = head_ptr;
     head_ptr = temp;
 
-    return head_ptr;
+    return temp;//was return head_ptr
 }
 
 template <class T>
-node<T>* _insertAfter(node<T>* head,node<T>* afterThis ,const T &insertThis){
+node<T>* _insertAfter(node<T>* &head,node<T>* &afterThis ,const T &insertThis){
+    cout<<"\nin _insertAfter\n";
+    if(afterThis==NULL){
+        cout<<"\n null\n";
+    }else{
     node<T>* temp = new node<T>(insertThis);
     temp->_next=afterThis;
     afterThis = temp;
 
-    return head;
+    }
+    return afterThis;
 }
 
 template<class T>
@@ -82,15 +88,6 @@ template<class T>
 node<T>* _lastNode(node<T>* head){
 
 }
-
-
-
-
-
-
-
-
-
 
 
 #endif // LINKED_LIST_FUNCTIONS_H

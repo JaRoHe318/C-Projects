@@ -14,6 +14,7 @@ struct node{
     T _item;
     node<T>* _next;
     node(T item = T());
+
     template <class U>
     friend ostream& operator <<(ostream& outs, const node<U>& print_me);
 };

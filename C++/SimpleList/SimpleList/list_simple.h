@@ -18,7 +18,7 @@ public:
 
     node<T>* InsertHead(T i);           //inset i at the head of list
 
-    node<T>* InsertAfter(T i, node<T>* iMarker);  //insert i after iMarker
+    node<T>* InsertAfter(T i, node<T> *&iMarker);  //insert i after iMarker
 
     node<T>* InsertRandom(node<T>* iMarker);
 
@@ -48,7 +48,7 @@ public:
     node<T>* End() const;                       //return the tail of the list
 
     template <class U>
-    friend ostream& operator <<(ostream& outs, /*const*/ List<U>& l); //insertion operator for list
+    friend ostream& operator <<(ostream& outs, const List<U>& l); //insertion operator for list
 
 private:
     node<T>* head;
@@ -58,7 +58,7 @@ private:
 
 template <class T>
 List<T>::List(){
-    head = nullptr;
+    head = NULL;
 }
 
 template <class T>
@@ -67,8 +67,10 @@ node<T>* List<T>::InsertHead(T i){
 }
 
 template <class T>
-node<T>* List<T>::InsertAfter(T i, node<T>* iMarker){
-    return _insert_head(iMarker, i);
+node<T>* List<T>::InsertAfter(T i, node<T>* &iMarker){
+    cout<<"\nIn Insertafter\n";
+    cout<<"Head:"<<head;
+    return _insertAfter(head, iMarker,i);
 }
 
 template <class T>
@@ -77,24 +79,23 @@ node<T>* List<T>::InsertRandom(node<T>* iMarker){
 }
 
 template <class T>
-node<T>* InsertBefore(T i, node<T>* iMarker){
+node<T>* List<T>::InsertBefore(T i, node<T>* iMarker){
 
 }
 
 template <class T>
-node<T>* InsertSorted(T i){
+node<T>* List<T>::InsertSorted(T i){
 
 }
 
 template <class T>
-T Delete(node<T>* iMarker){
+T List<T>::Delete(node<T>* iMarker){
 
 }
 
 template<class T>
 void List<T>::Print()const {
-    List<T> l;
-    cout<<l;
+    _print_list(cout, head);
 }
 
 template <class T>
@@ -103,7 +104,7 @@ node<T>* List<T>::Search(const T& item){
 }
 
 template <class T>
-node<T>* Prev(node<T>* iMarker){
+node<T>* List<T>::Prev(node<T>* iMarker){
 
 }
 
@@ -125,8 +126,11 @@ node<T>* List<T>::End() const{
 
 
 template<class U>
-ostream& operator <<(ostream& outs,/*const*/ List<U>& l){
-    return _print_list(outs, l.head);
+ostream& operator <<(ostream& outs,const List<U>& l){
+
+
+        return _print_list(outs, l.head);
+//    return outs;
 }
 
 #endif // LIST_SIMPLE_H
