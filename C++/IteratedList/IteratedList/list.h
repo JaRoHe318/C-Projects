@@ -1,8 +1,8 @@
+#ifndef LIST_H
+#define LIST_H
 
-#ifndef LIST_SIMPLE_H
-#define LIST_SIMPLE_H
 
-#include "linked_list_functions.h"
+#include "functions.h"
 #include "node.h"
 
 //start
@@ -156,4 +156,4 @@ ostream& operator <<(ostream& outs,const List<U>& l){
     return _print_list(outs, l.head);
 }
 
-#endif // LIST_SIMPLE_H
+#endif // LIST_H

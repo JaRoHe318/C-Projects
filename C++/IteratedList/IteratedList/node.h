@@ -1,5 +1,6 @@
 #ifndef NODE_H
 #define NODE_H
+
 #include <iostream>
 using namespace std;
 
@@ -23,5 +24,6 @@ ostream& operator <<(ostream& outs, const node<U>& print_me){
     outs<<print_me._item;
     return outs;
 }
+
 
 #endif // NODE_H
