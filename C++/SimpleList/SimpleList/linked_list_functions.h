@@ -50,21 +50,22 @@ node<T>* _insertAfter(node<T>* &head, node<T>* afterThis ,const T &insertThis){
 
 template<class T>
 node<T>* _insertRand(node<T>* &head,node<T>* afterThis){
-//    srand(time(0));
     int ran=rand() % 100 + 1;
-    //    _insert_head(head,ran);
     _insertAfter(head, afterThis, ran);
-
 }
 
 template<class T>
 node<T>* _insertBefore(node<T>* &head,node<T>* beforeThis ,const T &insertThis){
 
 }
+
 template<class T>
 node<T>* _previousNode(node<T>* head, node<T>* prevToThis){
     node<int>* walker = head;
     node<int>* stalker = NULL;
+    if (prevToThis == head){
+        return NULL;
+    }
     while (walker!=NULL){
         stalker=walker;
         walker = walker->_next;
@@ -72,28 +73,36 @@ node<T>* _previousNode(node<T>* head, node<T>* prevToThis){
             return stalker;
         }
     }
-    return head;
 }
+
 template<class T>
 node<T>* _deleteNode(node<T>* &head, node<T>* deleteThis){
     node<T>* temp = deleteThis->_next;
     node<T>* prev = _previousNode(head,deleteThis); //prev should return null if deleteThis is pointing to head
-    //
-    if (prev == NULL){//means you are trying to delete head
-        head = temp;
-    }
+
     if(deleteThis==head){//means you are trying to delete head. ALSO
         head=temp;
     }else{
         prev->_next=temp;
+        delete deleteThis;
     }
-    delete deleteThis;
     return head;
 }
 
 template<class T>
 node<T>* _copyList(node<T>* head){
+    node<T>* w = head;
+    node<T>* copy = NULL;
 
+    T tempVal;
+
+    while(w!=NULL){
+        tempVal = w->_item;
+        _insertAfter(copy,w,tempVal);
+//        _insertAfter(copy,w,w->_item);
+        w=w->_next;
+    }
+    return copy;
 }
 
 template<class T>
@@ -109,12 +118,12 @@ node<T>* _lastNode(node<T>* head){
     return head;
 }
 
+
 template <class T>
 void _deleteAll(node<T>* &head){
     node<int>* walker = head;
 
     while (walker!=NULL){
-        cout<<"."<<endl;
         _deleteNode(head, walker);
         walker = walker->_next;
     }

@@ -5,18 +5,20 @@
 #include "linked_list_functions.h"
 #include "node.h"
 
-//start
+
 template <class T>
 class List{
 
 public:
     List();
 
-            ~List();
-    //        List(const List<T> &copyThis);
+    ~List();
+    List(const List<T> &copyThis);
     //        List& operator =(const List<T> &RHS);
 
     node<T>* InsertHead(T i);           //inset i at the head of list
+
+    node<T>* Copy(List<T> L);
 
     node<T>* InsertAfter(T i, node<T>* iMarker);  //insert i after iMarker
 
@@ -56,29 +58,40 @@ private:
     node<T>* head;
 
 };
-//end
 
 template <class T>
 List<T>::List(){
     head = NULL;
-}/*
-template <class T>
-List<T>::List(const List<T> &copyThis){
-
 }
 
-template <class T>
-List<T>& List<T>::operator =(const List<T>& RHS){
-    if(this==&RHS){
-        return *this;
-    }
+//template <class T>
+//List<T>::List(const List<T> &copyThis){
+//    cout<<"\nCopyList\n";
+//    node<T>* w = NULL;
+//    w = copyThis.Begin();
+//    _copyList(w);
+//}
+template<class T>
+node<T>* List<T>::Copy(List<T> L){
+    cout<<"\nCopyList\n";
+    node<T>* w = NULL;
+    w = L.Begin();
+    _copyList(w);
+}
+
+//template <class T>
+//List<T>& List<T>::operator =(const List<T>& RHS){
+//    if(this==&RHS){
+//        return *this;
+//    }
 
 
-}*/
+//}
 template <class T>
 List<T>::~List(){
-//    _deleteAll(head);
+    _deleteAll(head);
 }
+
 template <class T>
 node<T>* List<T>::InsertHead(T i){
     return _insert_head(head, i);
@@ -96,7 +109,7 @@ node<T>* List<T>::InsertRandom(node<T>* iMarker){
 
 template <class T>
 node<T>* List<T>::InsertBefore(T i, node<T>* iMarker){
-
+    return _insertBefore(head,iMarker,i);
 }
 
 template <class T>
@@ -107,7 +120,6 @@ node<T>* List<T>::InsertSorted(T i){
 template <class T>
 node<T>* List<T>::Delete(node<T>* iMarker){
     _deleteNode(head,iMarker);
-//    _deleteAll(head);
 }
 
 template<class T>
@@ -147,9 +159,8 @@ node<T>* List<T>::Begin() const{
 }
 template <class T>
 node<T>* List<T>::End() const{
-   return _lastNode(head);
+    return _lastNode(head);
 }
-
 
 template<class U>
 ostream& operator <<(ostream& outs,const List<U>& l){

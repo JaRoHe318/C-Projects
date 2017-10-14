@@ -66,6 +66,10 @@ template<class T>
 node<T>* _previousNode(node<T>* head, node<T>* prevToThis){
     node<int>* walker = head;
     node<int>* stalker = NULL;
+
+    if (prevToThis == head){
+        return head;
+    }
     while (walker!=NULL){
         stalker=walker;
         walker = walker->_next;
@@ -73,7 +77,6 @@ node<T>* _previousNode(node<T>* head, node<T>* prevToThis){
             return stalker;
         }
     }
-    return head;
 }
 template<class T>
 node<T>* _deleteNode(node<T>* &head, node<T>* deleteThis){
