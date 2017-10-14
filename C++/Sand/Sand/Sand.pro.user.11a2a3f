@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<<<<<<< HEAD
-<!-- Written by QtCreator 4.3.1, 2017-10-03T14:51:05. -->
-=======
-<!-- Written by QtCreator 4.4.1, 2017-10-10T23:56:38. -->
->>>>>>> 1516a33bf2c2f30f4ecde63d9743509078c81dc2
+<!-- Written by QtCreator 4.3.1, 2017-10-02T20:39:35. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
-  <value type="QByteArray">{6bcd3652-e665-4d74-8042-0649a82b3d47}</value>
+  <value type="QByteArray">{11a2a3fa-60db-4ca6-adaa-3494968ac2ad}</value>
  </data>
  <data>
   <variable>ProjectExplorer.Project.ActiveTarget</variable>
@@ -289,12 +285,8 @@
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Sand</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Sand2</value>
-<<<<<<< HEAD
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/Jason/Documents/GitHub/Cpp-Projects/C++/Sand/Sand/Sand.pro</value>
-=======
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/JaRoHe318/Documents/GitHub/Cpp-Projects/C++/Sand/Sand/Sand.pro</value>
->>>>>>> 1516a33bf2c2f30f4ecde63d9743509078c81dc2
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/Jason/Documents/GitHub/Cpp-Projects/C++/SAnd/Sand/Sand.pro</value>
     <value type="bool" key="QmakeProjectManager.QmakeRunConfiguration.UseLibrarySearchPath">true</value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.CommandLineArguments"></value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.ProFile">Sand.pro</value>
