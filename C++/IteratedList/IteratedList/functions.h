@@ -1,5 +1,6 @@
-#ifndef LINKED_LIST_FUNCTIONS_H
-#define LINKED_LIST_FUNCTIONS_H
+#ifndef FUNCTIONS_H
+#define FUNCTIONS_H
+
 
 using namespace std;
 #include <iostream>
@@ -120,4 +121,5 @@ void _deleteAll(node<T>* &head){
     }
 }
 
-#endif // LINKED_LIST_FUNCTIONS_H
+
+#endif // FUNCTIONS_H

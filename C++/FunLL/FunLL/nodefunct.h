@@ -18,7 +18,7 @@ void PrintLists(Node<T>* head){
 
 template<class T>
 void PrintListBackwards(Node<T>* head){
-    while(head)
+//    while(head);
 }
 
 template<class T>
@@ -30,9 +30,7 @@ Node<T>* SearchList(Node<T>* head,const T &searchThis){
         }
         w = w->_next;
     }
-    if(w==NULL){
         return NULL;
-    }
 }
 
 
